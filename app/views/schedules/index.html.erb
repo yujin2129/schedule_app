@@ -1,0 +1,33 @@
+<h3>スケジュール一覧</h3>
+
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>タイトル</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>終日</th>
+      <th>更新日時</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @schedules.each do |schedule| %>
+      <tr>
+        <td><%= schedule.id %></td>
+        <td><%= schedule.title %></td>
+        <td><%= l schedule.start_date %></td>
+        <td><%= l schedule.end_date %></td>
+        <td><%= schedule.is_allday %></td>
+        <td><%= l schedule.updated_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to "スケジュール新規登録", :new_schedule %></p>
