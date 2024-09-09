@@ -1,33 +1,49 @@
-<h3>スケジュール一覧</h3>
-
-<% if flash[:notice] %>
-  <p class="notice"><%= flash[:notice] %></p>
-<% end %>
-
-<table>
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>タイトル</th>
-      <th>開始日</th>
-      <th>終了日</th>
-      <th>終日</th>
-      <th>更新日時</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @schedules.each do |schedule| %>
+<div class="container">
+  <h3 class="page_title">スケジュール一覧</h3>
+  
+  <% if flash[:notice] %>
+    <p class="notice"><%= flash[:notice] %></p>
+  <% end %>
+  
+  <table class="table table-hover table-responsive">
+    <thead>
       <tr>
-        <td><%= schedule.id %></td>
-        <td><%= schedule.title %></td>
-        <td><%= l schedule.start_date %></td>
-        <td><%= l schedule.end_date %></td>
-        <td><%= schedule.is_allday %></td>
-        <td><%= l schedule.updated_at %></td>
+        <th>id</th>
+        <th>タイトル</th>
+        <th>開始日</th>
+        <th>終了日</th>
+        <th>終日</th>
+        <th>更新日時</th>
+        <th>詳細</th>
+        <th>編集</th>
+        <th>削除</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<p><%= link_to "スケジュール新規登録", :new_schedule %></p>
+    </thead>
+  
+    <tbody>
+      <% @schedules.each do |schedule| %>
+        <tr>
+          <td><%= schedule.id %></td>
+          <td><%= schedule.title %></td>
+          <td><%= l schedule.start_date %></td>
+          <td><%= l schedule.end_date %></td>
+          <td><%= schedule.is_allday ? "◯" : "" %></td>
+          <td><%= l schedule.updated_at %></td>
+          <td><%= link_to "詳細", schedule %></td>
+          <td><%= link_to "編集", [:edit, schedule] %></td>
+          <td><%= link_to "削除", schedule, method: :delete, data:{confirm:"予定を削除しますか？"}%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <div class="page_bottom">
+    <p><%="本日の日付: #{l Date.today}" %></p>
+    <p>
+    合計
+    <span class="span_size"><%= @schedules.size %></span>
+    件
+    </p>
+    <%= link_to "新規追加", :new_schedule, class:"btn btn-primary" %>
+  </div>
+</div>
