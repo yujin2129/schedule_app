@@ -1,0 +1,35 @@
+<div class="container">
+  <h3>スケジュール詳細</h3>
+  
+  <table class="table table-hover table-responsive">
+    <tr>
+      <th>タイトル</th>
+      <td><%= @schedule.title %></td>
+    </tr>
+  
+    <tr>
+      <th>開始日</th>
+      <td><%= l @schedule.start_date %></td>
+    </tr>
+  
+    <tr>
+      <th>終了日</th>
+      <td><%= l @schedule.end_date %></td>
+    </tr>
+  
+    <tr>
+      <th>終日</th>
+      <td><%= @schedule.is_allday ? "◯" : "" %></td>
+    </tr>
+  
+    <tr>
+      <th>スケジュールメモ</th>
+      <td><%= @schedule.memo %></td>
+    </tr>
+  </table>
+  
+  <div>
+    <%= link_to "編集画面へ", [:edit, @schedule], class:"btn btn-primary" %>
+    <%= link_to "一覧へ戻る", :schedules, class:"btn btn-secondary" %>
+  </div>
+</div>
